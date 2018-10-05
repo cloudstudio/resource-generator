@@ -33,8 +33,6 @@ class {{ $request['singular'] }} extends Resource
         {!! $search !!}
     ];
 
-    peta
-
     /**
      * Get the fields displayed by the resource.
      *
