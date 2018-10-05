@@ -7,10 +7,9 @@ use Illuminate\Container\Container;
 
 trait GeneratorFunctions
 {
-
     /**
-     * Replace PHP tag
-     * 
+     * Replace PHP tag.
+     *
      * @param   string
      *
      * @return  string
@@ -21,8 +20,8 @@ trait GeneratorFunctions
     }
 
     /**
-     * Get current namespace
-     * 
+     * Get current namespace.
+     *
      * @return  string
      */
     public function getNamespace()
@@ -30,10 +29,10 @@ trait GeneratorFunctions
         return Container::getInstance()->getNamespace();
     }
 
-   
     public function formatSingular($tbl)
     {
         $replace = camel_case($tbl);
+
         return str_singular(ucwords($replace));
     }
 
@@ -43,31 +42,29 @@ trait GeneratorFunctions
      */
     public function getUniqueField($request)
     {
-
         $unique = [];
         foreach ($request['columns'] as $type):
             if ($type['relation']):
-                $unique[] = ucfirst($type['relation']);
-            else:
+                $unique[] = ucfirst($type['relation']); else:
                 $unique[] = $type['field'];
-            endif;
+        endif;
         endforeach;
 
         return array_unique($unique);
     }
 
     /**
-     * [arrayToFakeArray description]
+     * [arrayToFakeArray description].
      * @param  [type] $arr [description]
      * @return [type]      [description]
      */
     public function arrayToFakeArray($arr)
     {
-        return "'" . implode("', '", $arr) . "'";
+        return "'".implode("', '", $arr)."'";
     }
 
     /**
-     * [checkIfFileExist description]
+     * [checkIfFileExist description].
      * @param  [type] $namespace [description]
      * @param  [type] $file      [description]
      * @return [type]            [description]
@@ -75,22 +72,23 @@ trait GeneratorFunctions
     public function checkIfFileExist($namespace, $file)
     {
         $replace = str_replace('\\', '/', $namespace);
-        return file_exists(base_path() . '/' . $replace . $file . '.php');
+
+        return file_exists(base_path().'/'.$replace.$file.'.php');
     }
 
     /**
-     * [novaPath description]
+     * [novaPath description].
      * @param  [type] $resource [description]
      * @param  [type] $ext      [description]
      * @return [type]           [description]
      */
     public function novaPath($resource, $ext = null)
     {
-        return 'Nova/' . $resource . $ext;
+        return 'Nova/'.$resource.$ext;
     }
 
     /**
-     * [modelPath description]
+     * [modelPath description].
      * @param  [type] $namespace [description]
      * @param  [type] $model     [description]
      * @param  [type] $ext       [description]
@@ -99,19 +97,20 @@ trait GeneratorFunctions
     public function modelPath($namespace, $model, $ext = null)
     {
         $replace = str_replace('\\', '/', $namespace);
-        return $replace . '/' . $model . $ext;
+
+        return $replace.'/'.$model.$ext;
     }
 
     /**
-     * [checkOrCreateFolder description]
+     * [checkOrCreateFolder description].
      * @param  [type] $path [description]
      * @return [type]       [description]
      */
     public function checkOrCreateFolder($path)
     {
-        $folder = base_path() . '/' . str_replace('\\', '/', $path);
+        $folder = base_path().'/'.str_replace('\\', '/', $path);
         File::isDirectory($folder) or File::makeDirectory($folder, 0777, true, true);
+
         return $folder;
     }
-
 }

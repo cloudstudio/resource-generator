@@ -1,9 +1,9 @@
 <?php
+
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
 class Settings
 {
-
     /**
      * @var mixed
      */
@@ -28,7 +28,7 @@ class Settings
     }
 
     /**
-     * Return all settings
+     * Return all settings.
      *
      * @return json
      */
@@ -38,7 +38,7 @@ class Settings
     }
 
     /**
-     * Get the value from the given name
+     * Get the value from the given name.
      *
      * @param   $name
      *
@@ -54,7 +54,7 @@ class Settings
     }
 
     /**
-     * Set a value for given name
+     * Set a value for given name.
      *
      * @param $name
      * @param $value
@@ -67,9 +67,9 @@ class Settings
     }
 
     /**
-     * Save current options in the settings file
+     * Save current options in the settings file.
      *
-     * @return  Boolean
+     * @return  bool
      */
     public function saveSettings()
     {
@@ -82,7 +82,7 @@ class Settings
     }
 
     /**
-     * Check if a key exists
+     * Check if a key exists.
      *
      * @param $name
      */
@@ -96,7 +96,7 @@ class Settings
     }
 
     /**
-     * Check and return a key value if exists
+     * Check and return a key value if exists.
      *
      * @param   name
      *
@@ -112,7 +112,7 @@ class Settings
     }
 
     /**
-     * CSet a value for given name and value
+     * CSet a value for given name and value.
      *
      * @param   name
      * @param   value
@@ -126,7 +126,7 @@ class Settings
     }
 
     /**
-     * Get settings json contents
+     * Get settings json contents.
      *
      * @return  [type]  [description]
      */
@@ -136,7 +136,7 @@ class Settings
 
         if (file_exists($this->filePath)) {
             $jsonContents = file_get_contents($this->filePath);
-            if (!$this->isJson($jsonContents)) {
+            if (! $this->isJson($jsonContents)) {
                 $this->setDefaultSettings();
             }
         } else {
@@ -144,9 +144,9 @@ class Settings
         }
 
         $jsonContents = file_get_contents($this->filePath);
-        $settings     = json_decode($jsonContents, true);
-        $settings     = json_decode(json_encode($settings, JSON_FORCE_OBJECT), false);
-        $settings     = $this->cleanArrays($settings);
+        $settings = json_decode($jsonContents, true);
+        $settings = json_decode(json_encode($settings, JSON_FORCE_OBJECT), false);
+        $settings = $this->cleanArrays($settings);
 
         return $settings;
     }
@@ -166,11 +166,11 @@ class Settings
     }
 
     /**
-     * Set default settings
+     * Set default settings.
      */
     public function setDefaultSettings()
     {
-        $settings = file_get_contents(__DIR__ . '/../../../settings.json');
+        $settings = file_get_contents(__DIR__.'/../../../settings.json');
 
         return file_put_contents($this->filePath, $settings);
     }
@@ -182,6 +182,6 @@ class Settings
     {
         json_decode($string);
 
-        return (json_last_error() == JSON_ERROR_NONE);
+        return json_last_error() == JSON_ERROR_NONE;
     }
 }

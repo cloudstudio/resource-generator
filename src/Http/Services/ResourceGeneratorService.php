@@ -16,7 +16,7 @@ class ResourceGeneratorService
     }
 
     /**
-     * [getDatabaseTables description]
+     * [getDatabaseTables description].
      * @param  [type] $connection [description]
      * @return [type]             [description]
      */
@@ -33,14 +33,14 @@ class ResourceGeneratorService
     }
 
     /**
-     * [getTableColumns description]
+     * [getTableColumns description].
      * @param  [type] $table      [description]
      * @param  [type] $connection [description]
      * @return [type]             [description]
      */
     public function getTableColumns($table, $connection = null)
     {
-        return collect(DB::connection($connection)->select('show columns from ' . $table))->map(function ($column) use ($table, $connection) {
+        return collect(DB::connection($connection)->select('show columns from '.$table))->map(function ($column) use ($table, $connection) {
             $column = (object) array_change_key_case((array) $column);
 
             return [
@@ -58,7 +58,7 @@ class ResourceGeneratorService
     }
 
     /**
-     * [generateResourceFile description]
+     * [generateResourceFile description].
      * @param  [type] $request   [description]
      * @param  [type] $namespace [description]
      * @param  [type] $model     [description]
@@ -66,20 +66,19 @@ class ResourceGeneratorService
      */
     public function generateResourceFile($request, $namespace, $model)
     {
-
         $unique = $this->getUniqueField($request);
 
         $search = $this->arrayToFakeArray($request['search']);
 
         /* Generate Resource View*/
-        $html   = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model'))->render();
+        $html = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model'))->render();
         $render = $this->replacePHP($html);
 
         file_put_contents(app_path($this->novaPath($request['singular'], '.php')), $render);
     }
 
     /**
-     * [generateModelFile description]
+     * [generateModelFile description].
      * @param  [type] $request   [description]
      * @param  [type] $namespace [description]
      * @return [type]            [description]
@@ -87,7 +86,7 @@ class ResourceGeneratorService
     public function generateModelFile($request, $namespace)
     {
         /* Generate Model View*/
-        $html   = view('resource-generator::templates/model', compact('namespace', 'request'))->render();
+        $html = view('resource-generator::templates/model', compact('namespace', 'request'))->render();
         $render = $this->replacePHP($html);
 
         $this->checkOrCreateFolder($namespace);
@@ -96,7 +95,7 @@ class ResourceGeneratorService
     }
 
     /**
-     * Return column db type
+     * Return column db type.
      *
      * @param  $table
      * @param  $column

@@ -2,9 +2,9 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Controllers;
 
-use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 
 class ResourceGeneratorOptionsController extends Controller
 {
@@ -34,7 +34,7 @@ class ResourceGeneratorOptionsController extends Controller
      */
     public function setSettings(Request $request)
     {
-        if (!$request->has('settings')) {
+        if (! $request->has('settings')) {
             return response()->json(['message' => 'Error'], 404);
         }
 
@@ -44,7 +44,7 @@ class ResourceGeneratorOptionsController extends Controller
             $this->settings->set($key, $option['value']);
         }
 
-        if (!$this->settings->saveSettings()) {
+        if (! $this->settings->saveSettings()) {
             return response()->json(['message' => 'Error'], 404);
         }
 
@@ -52,7 +52,7 @@ class ResourceGeneratorOptionsController extends Controller
     }
 
     /**
-     * Set default settings
+     * Set default settings.
      *
      * @return  response
      */
