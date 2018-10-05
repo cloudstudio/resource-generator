@@ -1,0 +1,31 @@
+{
+    "name": "cloudstudio/resource-generator",
+    "description": "Resource Generator Laravel Nova",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "doctrine/dbal": "^2.8",
+        "laravel/framework": "5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cloudstudio\\ResourceGenerator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cloudstudio\\ResourceGenerator\\ResourceGeneratorServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,1 @@
+{{ $request['field'] }}::make(@if($request['label']) '{{ $request['label'] }}', @endif '{{ $request['name'] }}')
