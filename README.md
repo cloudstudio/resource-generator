@@ -48,7 +48,7 @@ We have issues with wrong indent when files are generated.
 ### Documentation
 
 
-Click <a href="">here</a> for full documentation.
+Click <a href="https://krato.github.io/resource-generator-docs/">here</a> for full documentation.
 
 
 ### Changelog
