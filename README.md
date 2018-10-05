@@ -1,9 +1,6 @@
 # Resource Generator tool for Laravel Nova
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/cloudstudio/nova-filemanager.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/nova-filemanager)
-[![CircleCI branch](https://img.shields.io/circleci/project/github/spatie/nova-tags-field/master.svg?style=flat-square)](https://circleci.com/gh/InfinetyES/Nova-Filemanager)
-[![StyleCI](https://github.styleci.io/repos/146585053/shield?branch=master)](https://github.styleci.io/repos/146585053)
-[![Total Downloads](https://img.shields.io/packagist/dt/infinety-es/nova-filemanager.svg?style=flat-square)](https://packagist.org/packages/infinety-es/nova-filemanager)
+[![Total Downloads](https://img.shields.io/packagist/dt/cloudstudio/resource-generator.svg?style=flat-square)](https://packagist.org/packages/cloudstudio/resource-generator)
 
 Resource Generator for Laravel Nova
 
@@ -36,6 +33,13 @@ public function tools()
 }
 ```
 
+Maybe you need link storage folder
+
+
+```bash
+php artisan storage:link
+```
+
 ### Minor Bugs
 
 We have issues with wrong indent when files are generated.
@@ -43,7 +47,8 @@ We have issues with wrong indent when files are generated.
 
 ### Documentation
 
-Click <a href="#">here</a> for full documentation.
+
+Click <a href="">here</a> for full documentation.
 
 
 ### Changelog

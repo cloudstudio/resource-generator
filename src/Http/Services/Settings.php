@@ -21,7 +21,7 @@ class Settings
     {
         $this->settings = $this->getSettingsFile();
         if ($customPath === null) {
-            $this->filePath = public_path('nova-resource-generator.json');
+            $this->filePath = storage_path('nova-resource-generator.json');
         } else {
             $this->filePath = $customPath;
         }
@@ -132,7 +132,7 @@ class Settings
      */
     private function getSettingsFile()
     {
-        $this->filePath = public_path('nova-resource-generator.json');
+        $this->filePath = storage_path('nova-resource-generator.json');
 
         if (file_exists($this->filePath)) {
             $jsonContents = file_get_contents($this->filePath);
