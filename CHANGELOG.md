@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `nova-filemanager` will be documented in this file
+All notable changes to `resource-generator` will be documented in this file
 
 ## 1 - 2018-10-05
 
