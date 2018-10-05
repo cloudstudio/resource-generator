@@ -31,7 +31,7 @@ public function tools()
 {
     return [
         // ...
-        new \Cloudstudio\ResourceGenerator\ResourceGenerator::class,
+        new \Cloudstudio\ResourceGenerator\ResourceGenerator(),
     ];
 }
 ```
