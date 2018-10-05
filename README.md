@@ -40,6 +40,13 @@ Maybe you need link storage folder
 php artisan storage:link
 ```
 
+### To Do
+
+- [x] Release v1
+- [ ] Complete the documentation
+- [ ] Decorate generated files properly
+- [ ] Refactorize vue code
+
 ### Minor Bugs
 
 We have issues with wrong indent when files are generated.
