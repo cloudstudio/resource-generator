@@ -2,12 +2,11 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Controllers;
 
-use Cloudstudio\ResourceGenerator\Http\Services\GeneratorFunctions;
-use Cloudstudio\ResourceGenerator\Http\Services\ModelGenerator;
-use Cloudstudio\ResourceGenerator\Http\Services\ResourceGeneratorService;
-use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Cloudstudio\ResourceGenerator\Http\Services\Settings;
+use Cloudstudio\ResourceGenerator\Http\Services\GeneratorFunctions;
+use Cloudstudio\ResourceGenerator\Http\Services\ResourceGeneratorService;
 
 class ResourceGeneratorController extends Controller
 {
@@ -39,8 +38,8 @@ class ResourceGeneratorController extends Controller
     {
         if ($request->has('createModel')) {
             $modelNamespace = $this->setting->getSettings()->namespace->value;
-            $last           = substr($modelNamespace, -1);
-            ($last == '\\') ? $modelNamespace : $modelNamespace . '\\';
+            $last = substr($modelNamespace, -1);
+            ($last == '\\') ? $modelNamespace : $modelNamespace.'\\';
 
             $model = $this->checkIfFileExist($modelNamespace, $request->get('singular'));
         }
@@ -54,7 +53,7 @@ class ResourceGeneratorController extends Controller
     }
 
     /**
-     * [getTables description]
+     * [getTables description].
      * @return [type] [description]
      */
     public function getTables()
@@ -97,7 +96,6 @@ class ResourceGeneratorController extends Controller
      */
     public function generateFile(Request $request)
     {
-
         $namespace = $this->setting->value('namespace');
 
         $this->generateResource($request, $this->getNamespace(), $namespace);
@@ -106,5 +104,4 @@ class ResourceGeneratorController extends Controller
             $this->generateModel($request, $namespace);
         endif;
     }
-
 }

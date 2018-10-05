@@ -2,10 +2,8 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Middleware;
 
-use Closure;
-use Cloudstudio\ResourceGenerator\ResourceGenerator;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Cloudstudio\ResourceGenerator\ResourceGenerator;
 
 class Authorize
 {

@@ -14,8 +14,8 @@ class ResourceGenerator extends Tool
      */
     public function boot()
     {
-        Nova::script('resource-generator', __DIR__ . '/../dist/js/tool.js');
-        Nova::style('resource-generator', __DIR__ . '/../dist/css/tool.css');
+        Nova::script('resource-generator', __DIR__.'/../dist/js/tool.js');
+        Nova::style('resource-generator', __DIR__.'/../dist/css/tool.css');
     }
 
     /**
