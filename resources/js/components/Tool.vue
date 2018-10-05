@@ -381,9 +381,9 @@ export default {
                     this.step = 3;
                     this.reset();
 
-                    // setTimeout(() => {
-                    //     location.reload();
-                    // }, 4000);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 4000);
                 });
         },
 
