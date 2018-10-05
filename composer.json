@@ -1,14 +1,33 @@
 {
     "name": "cloudstudio/resource-generator",
-    "description": "Resource Generator Laravel Nova",
+    "description": "Resource Generator for Laravel Nova",
     "keywords": [
+        "resource",
+        "generator",
         "laravel",
         "nova"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Toni Soriano",
+            "email": "info@cloudstudio.es",
+            "role": "Developer"
+        },
+        {
+            "name": "Eric Lagarda",
+            "email": "eric@infinety.es",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": ">=7.1.0",
+        "laravel/nova": "*",
         "doctrine/dbal": "^2.8"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.6",
+        "phpunit/phpunit": "7.1"
     },
     "autoload": {
         "psr-4": {
