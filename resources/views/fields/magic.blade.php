@@ -15,3 +15,4 @@
 @include('resource-generator::fields.options.select', ['request' => $request])
 @include('resource-generator::fields.options.status', ['request' => $request])
 @include('resource-generator::fields.options.format', ['request' => $request])
+@include('resource-generator::fields.options.number', ['request' => $request])
