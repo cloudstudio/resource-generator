@@ -34,6 +34,26 @@ class {{ $request['singular'] }} extends Resource
     ];
 
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+     public static function label()
+     {
+         return __('{{ str_plural(ucwords(str_replace('-', ' ', \kebab_case($request['singular'])))) }}');
+     }
+ 
+     /**
+      * Get the displayable singular label of the resource.
+      *
+      * @return string
+      */
+     public static function singularLabel()
+     {
+         return __('{{ $request['singular'] }}');
+     }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request  $request
