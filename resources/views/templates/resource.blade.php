@@ -40,7 +40,7 @@ class {{ $request['singular'] }} extends Resource
      */
      public static function label()
      {
-         return __('{{ str_plural(ucwords(str_replace('_', ' ', \kebab_case($request['singular'])))) }}');
+         return __('{{ str_plural(ucwords(str_replace('-', ' ', \kebab_case($request['singular'])))) }}');
      }
  
      /**
