@@ -49,7 +49,7 @@ class ResourceGeneratorService
                 return [
                     'name' => $column->getName(),
                     'type' => $column->getType()->getName(),
-                    'nullable' => !$column->getNotnull(),
+                    'nullable' => ! $column->getNotnull(),
                     'field' => null,
                     'label' => null,
                     'required' => null,
