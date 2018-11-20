@@ -2,66 +2,71 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
-use Illuminate\Support\Facades\DB;
+use Doctrine\DBAL\Schema\Column;
+use \Illuminate\Database\DatabaseManager;
 
 class ResourceGeneratorService
 {
     use \Cloudstudio\ResourceGenerator\Http\Services\GeneratorFunctions;
 
-    /**
-     * @param Storage $storage
-     */
-    public function __construct()
+    private $db;
+
+    public function __construct(DatabaseManager $db)
     {
+        $this->db = $db;
     }
 
     /**
      * [getDatabaseTables description].
+     *
      * @param  [type] $connection [description]
+     *
      * @return [type]             [description]
      */
     public function getDatabaseTables($connection = null)
     {
-        return collect(DB::connection()->getDoctrineSchemaManager()->listTableNames())->map(function ($val) {
-            foreach ($val as $key => $tbl) {
+        return collect($this->db->connection($connection)->getDoctrineSchemaManager()->listTableNames())
+            ->map(function (string $table) {
                 return [
-                    'table'    => $tbl,
-                    'singular' => $this->formatSingular($tbl),
+                    'table' => $table,
+                    'singular' => $this->formatSingular($table),
                 ];
-            }
-        });
+            });
     }
 
     /**
      * [getTableColumns description].
+     *
      * @param  [type] $table      [description]
      * @param  [type] $connection [description]
+     *
      * @return [type]             [description]
      */
     public function getTableColumns($table, $connection = null)
     {
-        return collect(DB::connection($connection)->getDoctrineSchemaManager()->listTableColumns($table))->map(function ($column) use ($table, $connection) {
-            $column = (object) array_change_key_case((array) $column);
-
-            return [
-                'name'     => $column->field,
-                'type'     => $this->getColumnType($table, $column->field, $connection),
-                'nullable' => $column->null == 'YES' ? true : false,
-                'field'    => null,
-                'label'    => null,
-                'required' => null,
-                'show'     => 'all',
-                'sortable' => null,
-                'relation' => null,
-            ];
-        });
+        return collect($this->db->connection($connection)->getDoctrineSchemaManager()->listTableColumns($table))
+            ->map(function (Column $column) use ($table, $connection) {
+                return [
+                    'name' => $column->getName(),
+                    'type' => $column->getType()->getName(),
+                    'nullable' => !$column->getNotnull(),
+                    'field' => null,
+                    'label' => null,
+                    'required' => null,
+                    'show' => 'all',
+                    'sortable' => null,
+                    'relation' => null,
+                ];
+            });
     }
 
     /**
      * [generateResourceFile description].
+     *
      * @param  [type] $request   [description]
      * @param  [type] $namespace [description]
      * @param  [type] $model     [description]
+     *
      * @return [type]            [description]
      */
     public function generateResourceFile($request, $namespace, $model)
@@ -79,8 +84,10 @@ class ResourceGeneratorService
 
     /**
      * [generateModelFile description].
+     *
      * @param  [type] $request   [description]
      * @param  [type] $namespace [description]
+     *
      * @return [type]            [description]
      */
     public function generateModelFile($request, $namespace)
@@ -92,19 +99,5 @@ class ResourceGeneratorService
         $this->checkOrCreateFolder($namespace);
 
         file_put_contents(base_path($this->modelPath($namespace, $request['singular'], '.php')), $render);
-    }
-
-    /**
-     * Return column db type.
-     *
-     * @param  $table
-     * @param  $column
-     * @param  $connection
-     *
-     * @return  string
-     */
-    private function getColumnType($table, $column, $connection = null)
-    {
-        return DB::connection($connection)->getDoctrineColumn($table, $column)->getType()->getName();
     }
 }
