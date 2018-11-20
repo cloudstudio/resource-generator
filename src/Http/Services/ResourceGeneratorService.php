@@ -22,7 +22,7 @@ class ResourceGeneratorService
      */
     public function getDatabaseTables($connection = null)
     {
-        return collect(DB::connection($connection)->select('show tables'))->map(function ($val) {
+        return collect(DB::connection()->getDoctrineSchemaManager()->listTableNames())->map(function ($val) {
             foreach ($val as $key => $tbl) {
                 return [
                     'table'    => $tbl,
@@ -40,7 +40,7 @@ class ResourceGeneratorService
      */
     public function getTableColumns($table, $connection = null)
     {
-        return collect(DB::connection($connection)->select('show columns from '.$table))->map(function ($column) use ($table, $connection) {
+        return collect(DB::connection($connection)->getDoctrineSchemaManager()->listTableColumns($table))->map(function ($column) use ($table, $connection) {
             $column = (object) array_change_key_case((array) $column);
 
             return [
