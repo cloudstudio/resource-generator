@@ -3,7 +3,7 @@
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
 use Doctrine\DBAL\Schema\Column;
-use \Illuminate\Database\DatabaseManager;
+use Illuminate\Database\DatabaseManager;
 
 class ResourceGeneratorService
 {
