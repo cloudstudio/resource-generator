@@ -493,7 +493,7 @@ export default {
             onlyOnIndex: 'onlyOnIndex',
             onlyOnDetail: 'onlyOnDetail',
             onlyOnForms: 'onlyOnForms',
-            exceptOnForm: 'exceptOnForm',
+            exceptOnForms: 'exceptOnForms',
             disabled: 'Disabled on views',
         },
         columnRelations: {
