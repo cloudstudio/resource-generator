@@ -1,36 +1,38 @@
-{	
-	"namespace": {
-		"name": "Namespace",
-		"value": "App",
-		"type": "String",
-		"help": "Default namespace for models"
-	},
-	"model": {
-		"name": "Model",
-		"value": false,
-		"type": "Boolean",
-		"help": "Set default check for model creation"
-	},
-	"required": {
-		"name": "Required",
-		"value": true,
-		"type": "Boolean",
-		"help": "Set default true or false based on column options. If is disabled required will be always unchecked"
-	},
-	"sortable": {
-		"name": "Sortable",
-		"value": true,
-		"type": "Boolean",
-		"help": "Set default true or false based on column options. If is disabled sortable will be always unchecked"
-	},
-	"hidden": {
-		"name": "Hidden Fields",
-		"value": [
-            "created_at",
-            "updated_at",
-            "deleted_at"
-        ],
-		"type": "Multiple",
-		"help": "Add the column names you want to hide in the fields edition"
-	}
+{
+    "resource": {
+        "name": "Resources Folder",
+        "value": "Nova",
+        "type": "String",
+        "help": "Default resource folder ( Do not end with / )"
+    },
+    "namespace": {
+        "name": "Namespace",
+        "value": "App",
+        "type": "String",
+        "help": "Default namespace for models ( Do not end with / )"
+    },
+    "model": {
+        "name": "Model",
+        "value": false,
+        "type": "Boolean",
+        "help": "Set default check for model creation"
+    },
+    "required": {
+        "name": "Required",
+        "value": true,
+        "type": "Boolean",
+        "help": "Set default true or false based on column options. If is disabled required will be always unchecked"
+    },
+    "sortable": {
+        "name": "Sortable",
+        "value": true,
+        "type": "Boolean",
+        "help": "Set default true or false based on column options. If is disabled sortable will be always unchecked"
+    },
+    "hidden": {
+        "name": "Hidden Fields",
+        "value": ["created_at", "updated_at", "deleted_at"],
+        "type": "Multiple",
+        "help": "Add the column names you want to hide in the fields edition"
+    }
 }

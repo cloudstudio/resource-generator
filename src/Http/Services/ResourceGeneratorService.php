@@ -40,7 +40,7 @@ class ResourceGeneratorService
      */
     public function getTableColumns($table, $connection = null)
     {
-        return collect(DB::connection($connection)->select('show columns from '.$table))->map(function ($column) use ($table, $connection) {
+        return collect(DB::connection($connection)->select('show columns from ' . $table))->map(function ($column) use ($table, $connection) {
             $column = (object) array_change_key_case((array) $column);
 
             return [
@@ -64,14 +64,14 @@ class ResourceGeneratorService
      * @param  [type] $model     [description]
      * @return [type]            [description]
      */
-    public function generateResourceFile($request, $namespace, $model)
+    public function generateResourceFile($request, $namespace, $model, $resource)
     {
         $unique = $this->getUniqueField($request);
 
         $search = $this->arrayToFakeArray($request['search']);
 
         /* Generate Resource View*/
-        $html = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model'))->render();
+        $html   = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model', 'resource'))->render();
         $render = $this->replacePHP($html);
 
         file_put_contents(app_path($this->novaPath($request['singular'], '.php')), $render);
@@ -86,7 +86,7 @@ class ResourceGeneratorService
     public function generateModelFile($request, $namespace)
     {
         /* Generate Model View*/
-        $html = view('resource-generator::templates/model', compact('namespace', 'request'))->render();
+        $html   = view('resource-generator::templates/model', compact('namespace', 'request'))->render();
         $render = $this->replacePHP($html);
 
         $this->checkOrCreateFolder($namespace);
