@@ -136,7 +136,7 @@ class Settings
 
         if (file_exists($this->filePath)) {
             $jsonContents = file_get_contents($this->filePath);
-            if (!$this->isJson($jsonContents)) {
+            if (! $this->isJson($jsonContents)) {
                 $this->setDefaultSettings();
             }
         } else {
@@ -144,9 +144,9 @@ class Settings
         }
 
         $jsonContents = file_get_contents($this->filePath);
-        $settings     = json_decode($jsonContents, true);
-        $settings     = json_decode(json_encode($settings, JSON_FORCE_OBJECT), false);
-        $settings     = $this->cleanArrays($settings);
+        $settings = json_decode($jsonContents, true);
+        $settings = json_decode(json_encode($settings, JSON_FORCE_OBJECT), false);
+        $settings = $this->cleanArrays($settings);
 
         return $settings;
     }
@@ -170,7 +170,7 @@ class Settings
      */
     public function setDefaultSettings()
     {
-        $settings = file_get_contents(__DIR__ . '/../../../settings.json');
+        $settings = file_get_contents(__DIR__.'/../../../settings.json');
 
         return file_put_contents($this->filePath, $settings);
     }

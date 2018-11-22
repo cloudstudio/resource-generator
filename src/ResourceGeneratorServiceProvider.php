@@ -2,11 +2,11 @@
 
 namespace Cloudstudio\ResourceGenerator;
 
-use Cloudstudio\ResourceGenerator\Http\Middleware\Authorize;
+use Laravel\Nova\Nova;
+use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Events\ServingNova;
-use Laravel\Nova\Nova;
+use Cloudstudio\ResourceGenerator\Http\Middleware\Authorize;
 
 class ResourceGeneratorServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class ResourceGeneratorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'resource-generator');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'resource-generator');
 
         $this->app->booted(function () {
             $this->routes();
@@ -38,7 +38,7 @@ class ResourceGeneratorServiceProvider extends ServiceProvider
 
         Route::middleware(['nova', Authorize::class])
             ->prefix('nova-vendor/resource-generator')
-            ->group(__DIR__ . '/../routes/api.php');
+            ->group(__DIR__.'/../routes/api.php');
     }
 
     /**
@@ -59,8 +59,8 @@ class ResourceGeneratorServiceProvider extends ServiceProvider
     private function checkSettingsFile()
     {
         $settingsFile = storage_path('nova-resource-generator.json');
-        if (!file_exists($settingsFile)) {
-            $settings = file_get_contents(__DIR__ . '/../settings.json');
+        if (! file_exists($settingsFile)) {
+            $settings = file_get_contents(__DIR__.'/../settings.json');
 
             file_put_contents($settingsFile, $settings);
         }
