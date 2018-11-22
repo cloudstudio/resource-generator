@@ -15,7 +15,7 @@ class {{ $request['singular'] }} extends Resource
      *
      * @var string
      */
-    public static $model = '{{ $model}}\{{$request['singular']}}';
+    public static $model = \{{ $model }}\{{ $request['singular'] }}::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -38,20 +38,20 @@ class {{ $request['singular'] }} extends Resource
      *
      * @return string
      */
-     public static function label()
-     {
-         return __('{{ str_plural(ucwords(str_replace('-', ' ', \kebab_case($request['singular'])))) }}');
-     }
+    public static function label()
+    {
+        return __('{{ \str_plural(\ucwords(\snake_case($request['singular'], ' '))) }}');
+    }
 
-     /**
-      * Get the displayable singular label of the resource.
-      *
-      * @return string
-      */
-     public static function singularLabel()
-     {
-         return __('{{ $request['singular'] }}');
-     }
+    /**
+    * Get the displayable singular label of the resource.
+    *
+    * @return string
+    */
+    public static function singularLabel()
+    {
+        return __('{{ \ucwords(\snake_case($request['singular'], ' ')) }}');
+    }
 
     /**
      * Get the fields displayed by the resource.
