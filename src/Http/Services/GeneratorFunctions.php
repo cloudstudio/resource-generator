@@ -2,13 +2,11 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
-use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 use File;
 use Illuminate\Container\Container;
 
 trait GeneratorFunctions
 {
-
     /**
      * @var mixed
      */
@@ -55,10 +53,11 @@ trait GeneratorFunctions
     public function getUniqueField($request)
     {
         $unique = [];
-        foreach ($request['columns'] as $type):
-            if ($type['relation']):
-                $unique[] = ucfirst($type['relation']);else:
-                $unique[] = $type['field'];
+        foreach ($request['columns'] as $type) :
+            if ($type['relation']) :
+                $unique[] = ucfirst($type['relation']);
+            else :
+                    $unique[] = $type['field'];
             endif;
         endforeach;
 
@@ -72,7 +71,7 @@ trait GeneratorFunctions
      */
     public function arrayToFakeArray($arr)
     {
-        return "'" . implode("', '", $arr) . "'";
+        return "'".implode("', '", $arr)."'";
     }
 
     /**
@@ -85,7 +84,7 @@ trait GeneratorFunctions
     {
         $replace = str_replace('\\', '/', $namespace);
 
-        return file_exists(base_path() . '/' . $replace . $file . '.php');
+        return file_exists(base_path().'/'.$replace.$file.'.php');
     }
 
     /**
@@ -96,11 +95,11 @@ trait GeneratorFunctions
      */
     public function novaPath($resource, $ext = null)
     {
-        $setting  = new Settings;
+        $setting = new Settings;
         $novaPath = $setting->value('resource');
-        $replace  = str_replace('\\', '/', $novaPath);
+        $replace = str_replace('\\', '/', $novaPath);
 
-        return $replace . '/' . $resource . $ext;
+        return $replace.'/'.$resource.$ext;
     }
 
     /**
@@ -112,7 +111,7 @@ trait GeneratorFunctions
      */
     public function modelPath($namespace, $model, $ext = null)
     {
-        return $this->namespaseToDirInApp($namespace) . '/' . $model . $ext;
+        return $this->namespaseToDirInApp($namespace).'/'.$model.$ext;
     }
 
     /**
