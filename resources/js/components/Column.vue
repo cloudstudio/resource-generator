@@ -368,7 +368,7 @@ export default {
             required: true,
         },
         tables: {
-            type: Object,
+            type: Array,
             required: true,
         },
         settings: {

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 | by your tool's "Authorize" middleware by default. Now, go build!
 |
  */
-Route::any('/get-tables', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class.'@getTables');
-Route::any('/get-columns', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class.'@getColumns');
-Route::post('/check-file', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class.'@checkFile');
-Route::post('/generate-resource', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class.'@generateFile');
+Route::any('/get-tables', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class . '@getTables');
+Route::any('/get-columns', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class . '@getColumns');
+Route::post('/check-file', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class . '@checkFile');
+Route::post('/generate-resource', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorController::class . '@generateFile');
 
-Route::get('/settings-get', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class.'@getSettings');
-Route::post('/settings-set', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class.'@setSettings');
-Route::post('/settings-reset', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class.'@resetDefault');
+Route::get('/settings-get', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class . '@getSettings');
+Route::post('/settings-set', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class . '@setSettings');
+Route::post('/settings-reset', \Cloudstudio\ResourceGenerator\Http\Controllers\ResourceGeneratorOptionsController::class . '@resetDefault');

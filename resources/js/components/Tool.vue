@@ -414,7 +414,7 @@ export default {
 
     computed: {
         fieldsObject: function() {
-            if (this.columns.length) {
+            if (_.size(this.columns) > 0) {
                 return _.toArray(
                     _.mapValues(this.columns, function(o) {
                         return o.name;

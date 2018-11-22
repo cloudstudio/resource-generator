@@ -27,9 +27,7 @@
                             <template v-if="setting.type == 'Multiple'">
                                 <multiselect v-model="setting.value" :taggable="true" :options="[]" :multiple="true" @tag="addOption($event, setting)"></multiselect>
                             </template>
-
-                            <!-- -->
-                            <p class="my-2 text-danger" v-if="table_error">{{ __('Please, choose a table') }}</p>
+                            
                         </div>
                     </div>
                 </template>
