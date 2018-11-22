@@ -69,14 +69,14 @@ class ResourceGeneratorService
      *
      * @return [type]            [description]
      */
-    public function generateResourceFile($request, $namespace, $model)
+    public function generateResourceFile($request, $namespace, $model, $resource)
     {
         $unique = $this->getUniqueField($request);
 
         $search = $this->arrayToFakeArray($request['search']);
 
         /* Generate Resource View*/
-        $html = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model'))->render();
+        $html = view('resource-generator::templates/resource', compact('namespace', 'request', 'unique', 'search', 'model', 'resource'))->render();
         $render = $this->replacePHP($html);
 
         file_put_contents(app_path($this->novaPath($request['singular'], '.php')), $render);

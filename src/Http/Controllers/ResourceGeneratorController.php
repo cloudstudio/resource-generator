@@ -2,11 +2,11 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 use Cloudstudio\ResourceGenerator\Http\Services\GeneratorFunctions;
 use Cloudstudio\ResourceGenerator\Http\Services\ResourceGeneratorService;
+use Cloudstudio\ResourceGenerator\Http\Services\Settings;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ResourceGeneratorController extends Controller
 {
@@ -38,8 +38,8 @@ class ResourceGeneratorController extends Controller
     {
         if ($request->has('createModel')) {
             $modelNamespace = $this->setting->getSettings()->namespace->value;
-            $last = substr($modelNamespace, -1);
-            ($last == '\\') ? $modelNamespace : $modelNamespace.'\\';
+            $last           = substr($modelNamespace, -1);
+            ($last == '\\') ? $modelNamespace : $modelNamespace . '\\';
 
             $model = $this->checkIfFileExist($modelNamespace, $request->get('singular'));
         }
@@ -77,9 +77,9 @@ class ResourceGeneratorController extends Controller
      * @param $data
      * @return mixed
      */
-    public function generateResource($data, $namespace, $model)
+    public function generateResource($data, $namespace, $model, $resource)
     {
-        return $this->service->generateResourceFile($data, $namespace, $model);
+        return $this->service->generateResourceFile($data, $namespace, $model, $resource);
     }
 
     /**
@@ -97,8 +97,9 @@ class ResourceGeneratorController extends Controller
     public function generateFile(Request $request)
     {
         $namespace = $this->setting->value('namespace');
+        $resource  = $this->setting->value('resource');
 
-        $this->generateResource($request, $this->getNamespace(), $namespace);
+        $this->generateResource($request, $this->getNamespace(), $namespace, $resource);
 
         if ($request['createModel']):
             $this->generateModel($request, $namespace);

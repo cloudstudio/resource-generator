@@ -1,6 +1,6 @@
 @phptag
 
-namespace {{ $namespace }}Nova;
+namespace {{ $namespace }}{{ $resource }};
 
 use Illuminate\Http\Request;
 @foreach($unique as $type)
@@ -42,7 +42,7 @@ class {{ $request['singular'] }} extends Resource
      {
          return __('{{ str_plural(ucwords(str_replace('-', ' ', \kebab_case($request['singular'])))) }}');
      }
- 
+
      /**
       * Get the displayable singular label of the resource.
       *
