@@ -55,10 +55,9 @@ trait GeneratorFunctions
         $unique = [];
         foreach ($request['columns'] as $type) :
             if ($type['relation']) :
-                $unique[] = ucfirst($type['relation']);
-            else :
+                $unique[] = ucfirst($type['relation']); else :
                     $unique[] = $type['field'];
-            endif;
+        endif;
         endforeach;
 
         return array_unique($unique);
