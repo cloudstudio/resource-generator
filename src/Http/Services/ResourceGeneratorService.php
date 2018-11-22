@@ -98,6 +98,6 @@ class ResourceGeneratorService
 
         $this->checkOrCreateFolder($namespace);
 
-        file_put_contents(base_path($this->modelPath($namespace, $request['singular'], '.php')), $render);
+        file_put_contents($this->modelPath($namespace, $request['singular'], '.php'), $render);
     }
 }

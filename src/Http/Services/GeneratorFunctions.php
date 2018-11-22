@@ -112,9 +112,7 @@ trait GeneratorFunctions
      */
     public function modelPath($namespace, $model, $ext = null)
     {
-        $replace = str_replace('\\', '/', $namespace);
-
-        return $replace . '/' . $model . $ext;
+        return $this->namespaseToDirInApp($namespace) . '/' . $model . $ext;
     }
 
     /**
@@ -124,9 +122,22 @@ trait GeneratorFunctions
      */
     public function checkOrCreateFolder($path)
     {
-        $folder = base_path() . '/' . str_replace('\\', '/', $path);
+        $folder = $this->namespaseToDirInApp($path);
         File::isDirectory($folder) or File::makeDirectory($folder, 0777, true, true);
 
         return $folder;
+    }
+
+    /**
+     * [namespaseToDirInApp description].
+     * @param  [type] $namespace [description]
+     * @return [type]            [description]
+     */
+    protected function namespaseToDirInApp($namespace)
+    {
+        $spaces = explode('\\', $namespace);
+        array_shift($spaces);
+
+        return app_path(implode('/', $spaces));
     }
 }
