@@ -2,13 +2,11 @@
 
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
-use Cloudstudio\ResourceGenerator\Http\Services\Settings;
 use File;
 use Illuminate\Container\Container;
 
 trait GeneratorFunctions
 {
-
     /**
      * @var mixed
      */
@@ -55,11 +53,11 @@ trait GeneratorFunctions
     public function getUniqueField($request)
     {
         $unique = [];
-        foreach ($request['columns'] as $type):
-            if ($type['relation']):
-                $unique[] = ucfirst($type['relation']);else:
-                $unique[] = $type['field'];
-            endif;
+        foreach ($request['columns'] as $type) :
+            if ($type['relation']) :
+                $unique[] = ucfirst($type['relation']); else :
+                    $unique[] = $type['field'];
+        endif;
         endforeach;
 
         return array_unique($unique);
@@ -72,7 +70,7 @@ trait GeneratorFunctions
      */
     public function arrayToFakeArray($arr)
     {
-        return "'" . implode("', '", $arr) . "'";
+        return "'".implode("', '", $arr)."'";
     }
 
     /**
@@ -85,7 +83,7 @@ trait GeneratorFunctions
     {
         $replace = str_replace('\\', '/', $namespace);
 
-        return file_exists(base_path() . '/' . $replace . $file . '.php');
+        return file_exists(base_path().'/'.$replace.$file.'.php');
     }
 
     /**
@@ -96,11 +94,11 @@ trait GeneratorFunctions
      */
     public function novaPath($resource, $ext = null)
     {
-        $setting  = new Settings;
+        $setting = new Settings;
         $novaPath = $setting->value('resource');
-        $replace  = str_replace('\\', '/', $novaPath);
+        $replace = str_replace('\\', '/', $novaPath);
 
-        return $replace . '/' . $resource . $ext;
+        return $replace.'/'.$resource.$ext;
     }
 
     /**
@@ -112,9 +110,7 @@ trait GeneratorFunctions
      */
     public function modelPath($namespace, $model, $ext = null)
     {
-        $replace = str_replace('\\', '/', $namespace);
-
-        return $replace . '/' . $model . $ext;
+        return $this->namespaseToDirInApp($namespace).'/'.$model.$ext;
     }
 
     /**
@@ -124,9 +120,22 @@ trait GeneratorFunctions
      */
     public function checkOrCreateFolder($path)
     {
-        $folder = base_path() . '/' . str_replace('\\', '/', $path);
+        $folder = $this->namespaseToDirInApp($path);
         File::isDirectory($folder) or File::makeDirectory($folder, 0777, true, true);
 
         return $folder;
+    }
+
+    /**
+     * [namespaseToDirInApp description].
+     * @param  [type] $namespace [description]
+     * @return [type]            [description]
+     */
+    protected function namespaseToDirInApp($namespace)
+    {
+        $spaces = explode('\\', $namespace);
+        array_shift($spaces);
+
+        return app_path(implode('/', $spaces));
     }
 }
