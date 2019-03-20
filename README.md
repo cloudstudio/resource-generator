@@ -14,6 +14,7 @@ Resource Generator for Laravel Nova
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
 ```bash
+
 composer require cloudstudio/resource-generator
 ```
 
