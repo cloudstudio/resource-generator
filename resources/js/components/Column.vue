@@ -967,7 +967,11 @@ export default {
         },
 
         setColumnShowIn() {
-            this.column.show = 'hideFromIndex';
+            if (this.settings.show.value) {
+                this.column.show = this.settings.show.value;
+            } else {
+                this.column.show = 'all';
+            }
             if (
                 this.column.name == 'updated_at' ||
                 this.column.name == 'created_at' ||

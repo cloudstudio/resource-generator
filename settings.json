@@ -17,8 +17,14 @@
         "type": "Boolean",
         "help": "Set default check for model creation"
     },
+    "show": {
+        "name": "Show",
+        "value": false,
+        "type": "Select",
+        "help": "Set default show value"
+    },
     "required": {
-        "name": "Required",
+        "name": "test",
         "value": true,
         "type": "Boolean",
         "help": "Set default true or false based on column options. If is disabled required will be always unchecked"
@@ -31,7 +37,11 @@
     },
     "hidden": {
         "name": "Hidden Fields",
-        "value": ["created_at", "updated_at", "deleted_at"],
+        "value": [
+            "created_at",
+            "updated_at",
+            "deleted_at"
+        ],
         "type": "Multiple",
         "help": "Add the column names you want to hide in the fields edition"
     }

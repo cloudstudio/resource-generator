@@ -1,56 +1,86 @@
 <template>
-    <div>
-        <h1 class="mb-3 text-90 font-normal text-2xl">
-            {{ __('Generator - Settings') }}
-        </h1>
-        <div class="card">
-            <div class="flex flex-wrap border-b border-40">
-
-                <template v-for="setting in settings">
-                    <div class="w-full flex flex-wrap" :key="setting.name">
-                        <div class="w-1/3 px-8 py-6">
-                            <label class="block text-80 pt-2 leading-tight" for="table">
-                                {{ setting.name }}
-                            </label>
-                            <small>{{ setting.help }}</small>
-                        </div>
-                        <div class="w-1/2 px-8 py-6">
-                            
-                            <template v-if="setting.type == 'String'">
-                                <input class="w-full form-control form-input" id="resource_name" v-model="setting.value" v-on:input="fixBars($event, setting)">
-                            </template>
-
-                            <template v-if="setting.type == 'Boolean'">
-                                <toggle-button v-model="setting.value" :sync="true" />
-                            </template>
-
-                            <template v-if="setting.type == 'Multiple'">
-                                <multiselect v-model="setting.value" :taggable="true" :options="[]" :multiple="true" @tag="addOption($event, setting)"></multiselect>
-                            </template>
-                            
-                        </div>
-                    </div>
-                </template>
-            	
+  <div>
+    <h1 class="mb-3 text-90 font-normal text-2xl">{{ __('Generator - Settings') }}</h1>
+    <div class="card">
+      <div class="flex flex-wrap border-b border-40">
+        <template v-for="setting in settings">
+          <div class="w-full flex flex-wrap" :key="setting.name">
+            <div class="w-1/3 px-8 py-6">
+              <label class="block text-80 pt-2 leading-tight" for="table">{{ setting.name }}</label>
+              <small>{{ setting.help }}</small>
             </div>
-            <div class="bg-30 flex px-8 py-4">
+            <div class="w-1/2 px-8 py-6">
+              <template v-if="setting.type == 'String'">
+                <input
+                  class="w-full form-control form-input"
+                  id="resource_name"
+                  v-model="setting.value"
+                  v-on:input="fixBars($event, setting)"
+                >
+              </template>
 
-                <div class="ml-auto">
-                    <button class="btn text-80 font-normal h-9 px-3 mr-3 btn-link" type="button" @click="resetCheck" v-if="!reset_button">
-                        {{ __('Reset to defaults') }}
-                    </button>
+              <template v-if="setting.type == 'Select'">
+                <select
+                  class="w-full form-control form-input form-input-bordered px-4"
+                  v-model="setting.value"
+                  v-on:input="fixBars($event, setting)"
+                >
+                  <option value="all">All</option>
+                  <option value="hideFromIndex">hideFromIndex</option>
+                  <option value="hideFromDetail">hideFromDetail</option>
+                  <option value="hideWhenCreating">hideWhenCreating</option>
+                  <option value="hideWhenUpdating">hideWhenUpdating</option>
+                  <option value="onlyOnIndex">onlyOnIndex</option>
+                  <option value="onlyOnDetail">onlyOnDetail</option>
+                  <option value="onlyOnForms">onlyOnForms</option>
+                  <option value="exceptOnForms">exceptOnForms</option>
+                  <option value="disabled">Disabled on views</option>
+                </select>
+              </template>
 
-                    <button class="btn text-80 font-normal h-9 px-3 mr-3 btn-link" type="button" @click="reset"  v-if="reset_button">
-                        {{ __('Are you sure?') }}
-                    </button>
+              <template v-if="setting.type == 'Boolean'">
+                <toggle-button v-model="setting.value" :sync="true"/>
+              </template>
 
-                    <button class="ml-auto btn btn-default btn-primary mr-3" dusk="create-and-add-another-button" type="button"  @click="saveSettings">
-                        {{ __('Save options') }}
-                    </button>
-                </div>
+              <template v-if="setting.type == 'Multiple'">
+                <multiselect
+                  v-model="setting.value"
+                  :taggable="true"
+                  :options="[]"
+                  :multiple="true"
+                  @tag="addOption($event, setting)"
+                ></multiselect>
+              </template>
             </div>
+          </div>
+        </template>
+      </div>
+      <div class="bg-30 flex px-8 py-4">
+        <div class="ml-auto">
+          <button
+            class="btn text-80 font-normal h-9 px-3 mr-3 btn-link"
+            type="button"
+            @click="resetCheck"
+            v-if="!reset_button"
+          >{{ __('Reset to defaults') }}</button>
+          
+          <button
+            class="btn text-80 font-normal h-9 px-3 mr-3 btn-link"
+            type="button"
+            @click="reset"
+            v-if="reset_button"
+          >{{ __('Are you sure?') }}</button>
+          
+          <button
+            class="ml-auto btn btn-default btn-primary mr-3"
+            dusk="create-and-add-another-button"
+            type="button"
+            @click="saveSettings"
+          >{{ __('Save options') }}</button>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

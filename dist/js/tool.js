@@ -20695,7 +20695,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         setColumnShowIn: function setColumnShowIn() {
-            this.column.show = 'hideFromIndex';
+            if (this.settings.show.value) {
+                this.column.show = this.settings.show.value;
+            } else {
+                this.column.show = 'all';
+            }
             if (this.column.name == 'updated_at' || this.column.name == 'created_at' || this.column.name == 'deleted_at') {
                 this.$set(this.column, 'show', 'disabled');
             }
@@ -25696,6 +25700,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -26196,7 +26230,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h1", { staticClass: "mb-3 text-90 font-normal text-2xl" }, [
-      _vm._v("\n        " + _vm._s(_vm.__("Generator - Settings")) + "\n    ")
+      _vm._v(_vm._s(_vm.__("Generator - Settings")))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
@@ -26217,13 +26251,7 @@ var render = function() {
                         staticClass: "block text-80 pt-2 leading-tight",
                         attrs: { for: "table" }
                       },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(setting.name) +
-                            "\n                        "
-                        )
-                      ]
+                      [_vm._v(_vm._s(setting.name))]
                     ),
                     _vm._v(" "),
                     _c("small", [_vm._v(_vm._s(setting.help))])
@@ -26265,6 +26293,106 @@ var render = function() {
                                 ]
                               }
                             })
+                          ]
+                        : _vm._e(),
+                      _vm._v(" "),
+                      setting.type == "Select"
+                        ? [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: setting.value,
+                                    expression: "setting.value"
+                                  }
+                                ],
+                                staticClass:
+                                  "w-full form-control form-input form-input-bordered px-4",
+                                on: {
+                                  input: function($event) {
+                                    return _vm.fixBars($event, setting)
+                                  },
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      setting,
+                                      "value",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "all" } }, [
+                                  _vm._v("All")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "hideFromIndex" } },
+                                  [_vm._v("hideFromIndex")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "hideFromDetail" } },
+                                  [_vm._v("hideFromDetail")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "hideWhenCreating" } },
+                                  [_vm._v("hideWhenCreating")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "hideWhenUpdating" } },
+                                  [_vm._v("hideWhenUpdating")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "onlyOnIndex" } },
+                                  [_vm._v("onlyOnIndex")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "onlyOnDetail" } },
+                                  [_vm._v("onlyOnDetail")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "onlyOnForms" } },
+                                  [_vm._v("onlyOnForms")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "exceptOnForms" } },
+                                  [_vm._v("exceptOnForms")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "disabled" } }, [
+                                  _vm._v("Disabled on views")
+                                ])
+                              ]
+                            )
                           ]
                         : _vm._e(),
                       _vm._v(" "),
@@ -26327,13 +26455,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.resetCheck }
                 },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.__("Reset to defaults")) +
-                      "\n                "
-                  )
-                ]
+                [_vm._v(_vm._s(_vm.__("Reset to defaults")))]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -26345,13 +26467,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.reset }
                 },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.__("Are you sure?")) +
-                      "\n                "
-                  )
-                ]
+                [_vm._v(_vm._s(_vm.__("Are you sure?")))]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -26362,13 +26478,7 @@ var render = function() {
               attrs: { dusk: "create-and-add-another-button", type: "button" },
               on: { click: _vm.saveSettings }
             },
-            [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.__("Save options")) +
-                  "\n                "
-              )
-            ]
+            [_vm._v(_vm._s(_vm.__("Save options")))]
           )
         ])
       ])
