@@ -1,1 +1,1 @@
-{{ ucwords($request['relation']) }}::make('{{ str_singular(ucwords( camel_case($request['related_table']))) }}')
+{{ ucwords($request['relation']) }}::make('{{ Str::singular(ucwords( camel_case($request['related_table']))) }}')

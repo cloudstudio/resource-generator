@@ -44,7 +44,7 @@ trait GeneratorFunctions
     {
         $replace = Str::camel($tbl);
 
-        return str_singular(ucwords($replace));
+        return Str::singular(ucwords($replace));
     }
 
     /**
