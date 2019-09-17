@@ -3,6 +3,7 @@
 namespace Cloudstudio\ResourceGenerator\Http\Services;
 
 use File;
+use Illuminate\Support\Str;
 use Illuminate\Container\Container;
 
 trait GeneratorFunctions
@@ -41,7 +42,7 @@ trait GeneratorFunctions
 
     public function formatSingular($tbl)
     {
-        $replace = camel_case($tbl);
+        $replace = Str::camel($tbl);
 
         return str_singular(ucwords($replace));
     }
@@ -55,9 +56,10 @@ trait GeneratorFunctions
         $unique = [];
         foreach ($request['columns'] as $type) :
             if ($type['relation']) :
-                $unique[] = ucfirst($type['relation']); else :
-                    $unique[] = $type['field'];
-        endif;
+                $unique[] = ucfirst($type['relation']);
+            else :
+                $unique[] = $type['field'];
+            endif;
         endforeach;
 
         return array_unique($unique);
@@ -70,7 +72,7 @@ trait GeneratorFunctions
      */
     public function arrayToFakeArray($arr)
     {
-        return "'".implode("', '", $arr)."'";
+        return "'" . implode("', '", $arr) . "'";
     }
 
     /**
@@ -83,7 +85,7 @@ trait GeneratorFunctions
     {
         $replace = str_replace('\\', '/', $namespace);
 
-        return file_exists(base_path().'/'.$replace.$file.'.php');
+        return file_exists(base_path() . '/' . $replace . $file . '.php');
     }
 
     /**
@@ -98,7 +100,7 @@ trait GeneratorFunctions
         $novaPath = $setting->value('resource');
         $replace = str_replace('\\', '/', $novaPath);
 
-        return $replace.'/'.$resource.$ext;
+        return $replace . '/' . $resource . $ext;
     }
 
     /**
@@ -110,7 +112,7 @@ trait GeneratorFunctions
      */
     public function modelPath($namespace, $model, $ext = null)
     {
-        return $this->namespaseToDirInApp($namespace).'/'.$model.$ext;
+        return $this->namespaseToDirInApp($namespace) . '/' . $model . $ext;
     }
 
     /**
