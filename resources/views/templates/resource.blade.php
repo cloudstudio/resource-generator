@@ -40,7 +40,7 @@ class {{ $request['singular'] }} extends Resource
      */
     public static function label()
     {
-        return __('{{ \str_plural(\ucwords(\snake_case($request['singular'], ' '))) }}');
+        return __('{{ \Str::plural(\ucwords(\Str::snake($request['singular'], ' '))) }}');
     }
 
     /**
@@ -50,7 +50,7 @@ class {{ $request['singular'] }} extends Resource
     */
     public static function singularLabel()
     {
-        return __('{{ \ucwords(\snake_case($request['singular'], ' ')) }}');
+        return __('{{ \ucwords(\Str::snake($request['singular'], ' ')) }}');
     }
 
     /**
