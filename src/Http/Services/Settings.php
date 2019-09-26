@@ -1,6 +1,7 @@
 <?php
 
 namespace Cloudstudio\ResourceGenerator\Http\Services;
+use Illuminate\Support\Str;
 
 class Settings
 {
@@ -119,7 +120,7 @@ class Settings
      */
     private function setValue($name, $value)
     {
-        if (is_string($value) && str_contains($value, '\\')) {
+        if (is_string($value) && Str::contains($value, '\\')) {
             $value = str_replace('\\', '\\\\', $value);
         }
         $this->settings->{$name}->value = $value;
