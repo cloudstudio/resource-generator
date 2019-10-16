@@ -24,7 +24,7 @@ protected $casts = [
 @if(isset($request['relation']))
 public function {{ Str::singular($request['related_table']) }}()
 {
-return $this->{{ $request['relation'] }}('{{ $namespace }}\{{Str::singular(ucwords( camel_case($request['related_table']))) }}', '{{ $request['name'] }}', '{{ $request['related_column'] }}');
+return $this->{{ $request['relation'] }}('{{ $namespace }}\{{Str::singular(ucwords( Str::camel($request['related_table']))) }}', '{{ $request['name'] }}', '{{ $request['related_column'] }}');
 }
 @endif
 @endforeach
