@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\{{ $type }};
 @endforeach
 
-
 class {{ $request['singular'] }} extends Resource
 {
     /**
