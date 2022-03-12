@@ -23,7 +23,7 @@
     "require": {
         "php": ">=7.1.0",
         "laravel/nova": "*",
-        "doctrine/dbal": "^2.8"
+        "doctrine/dbal": "^2.8|^3.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.6",
